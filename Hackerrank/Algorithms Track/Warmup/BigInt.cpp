@@ -12,17 +12,11 @@ long aVeryBigSum(int n, vector<long> ar) {
     /*
      * Write your code here.
      */
-    int sum = 0;
-    // for(int i=0;i<n;i++){
-    //     char arr = ar[i];
-    //    int add = atoi(arr);
-    //     sum = sum + add;
-    // }
+   long sum = 0;
     for(int i=0;i<n;i++){
-        cout<<ar[i]<<endl;
+    sum = sum + ar[i];
     }
-    int aa = 1111;
-    return aa;
+    return sum;
 }
 
 int main()
