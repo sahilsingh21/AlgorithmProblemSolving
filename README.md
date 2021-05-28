@@ -4,9 +4,6 @@ This repository contains solutions to the algorithmic problems that I have solve
 
 # Roadmap For Practicing Data Structures And Algorithms
 
-## Practice Link
-
-- https://www.codingninjas.com/codestudio/guided-paths/data-structures-algorithms
 
 ## Arrays & Strings
 
