@@ -11,31 +11,61 @@ public:
 
 void PrintList(Node *n)
 {
-    while (n != NULL)
+    while (n->next != NULL)
     {
         cout << n->data << " ";
         n = n->next;
+        cout << n << " " << n->next << " " << endl;
+    }
+}
+void newNode(Node *h, int val)
+{
+    if (h == NULL)
+    {
+        h = new Node;
+        h->data = val;
+    }
+}
+
+void Create(Node *s)
+{
+    Node *temp = new Node;
+    temp->next = NULL;
+    if (s->next == NULL)
+    {
+        int a;
+        cout << "Enter the first value :";
+        cin >> a;
+        newNode(s, a);
+    }
+    else
+    {
+        int a;
+        cout << "Enter the value :";
+        cin >> a;
+        temp->next = s;
+        s->next = temp;
+        s->data = a;
     }
 }
 
 int main()
 {
     Node *head = NULL;
-    Node *second = NULL;
-    Node *third = NULL;
+    // Node *end = NULL;
+    // Node *p = head;
+    // head = new Node;
+    // end = new Node;
 
-    head = new Node;
-    second = new Node;
-    third = new Node;
+    head->next = NULL;
+    // end->next = NULL;
 
-    head->data = 1;
-    head->next = second;
-
-    second->data = 2;
-    second->next = third;
-
-    third->data = 3;
-    third->next = NULL;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        Create(head);
+    }
 
     PrintList(head);
 
