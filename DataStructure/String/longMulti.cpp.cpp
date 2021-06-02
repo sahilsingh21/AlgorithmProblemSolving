@@ -2,51 +2,91 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+string add(string a, string b)
+{
+    if (b.length() > a.length())
+    {
+        swap(b, a);
+    }
+    reverse(a.begin(), a.end());
+    reverse(b.begin(), b.end());
+
+    int n1 = a.length();
+    int n2 = b.length();
+    int carry = 0;
+    string c = "";
+
+    for (int i = 0; i < n2; i++)
+    {
+        int temp;
+        temp = ((a[i] - '0') + (b[i] - '0')) + carry;
+        carry = temp / 10;
+        temp = (temp % 10) + '0';
+        c.push_back(temp);
+    }
+    for (int i = n2; i < n1; i++)
+    {
+        int temp;
+        temp = (a[i] - '0') + carry;
+        carry = temp / 10;
+        temp = (temp % 10) + '0';
+        c.push_back(temp);
+    }
+    reverse(c.begin(), c.end());
+    return c;
+}
+
 int main()
 {
-    string a = "126";
-    string b = "35";
+    string a = "9999999999";
+    string b = "55555555";
+    cout << "Value of x :";
+    cin >> a;
+    cout << endl
+         << "Value of y :";
+    cin >> b;
     string c;
-    // int al = a.size();
-    // int bl = b.size();
+    int al = a.size();
+    int bl = b.size();
     int carry = 0;
-    int mul = 1;
-    // if (al < bl)
-    // {
-    //     swap(b, a);
-    // }
+    if (al < bl)
+    {
+        swap(b, a);
+    }
 
-    // reverse(a.begin(), a.end());
-    // reverse(b.begin(), b.end());
+    reverse(a.begin(), a.end());
+    reverse(b.begin(), b.end());
     int n = a.size();
     int m = b.size();
-    vector<char> st;
-    vector<char> tp;
+    string st;
+    string tp;
     int flag = 0;
-    for (int i = m - 1; i >= 0; i--)
+    for (int i = 0; i < b.size(); i++)
     {
-        for (int j = n - 1; j >= 0; j--)
+        for (int j = 0; j < a.size(); j++)
         {
+            int mul;
             mul = (((a[j] - '0') * (b[i] - '0')) + carry);
-            //cout << mul << " " << carry << endl;
-            if (mul > 9)
+            if (j != (a.size() - 1))
+            {
+                carry = mul / 10;
+                int temp = (mul % 10);
+                temp = temp + '0';
+                st.push_back(temp);
+                mul = 1;
+            }
+            else if (j == (a.size() - 1))
             {
                 carry = mul / 10;
                 int temp = (mul % 10) + '0';
                 st.push_back(temp);
+                st.push_back((carry % 10) + '0');
                 mul = 1;
-            }
-            else if (mul <= 9)
-            {
                 carry = 0;
-                int temp = (mul % 10) + '0';
-                st.push_back(temp);
-                mul = 1;
             }
-            // c = itos(mul);
         }
-        carry = 0;
-        for (int k = st.size() - 1; k >= 0; k--)
+
+        for (int k = (st.size() - 1); k >= 0; k--)
         {
             tp.push_back(st[k]);
         }
@@ -60,22 +100,12 @@ int main()
         tp.push_back('+');
     }
 
-    // c = ((a[0] - '0') * (b[0] - '0'));
-    // c = c[0] + '0';
-    // cout << n << " " << m << " " << a << " " << b << endl;
-    cout << endl
-         << "string" << endl;
-    for (int i = 0; i < tp.size(); i++)
-    {
-        cout << tp[i];
-    }
-
-    vector<char> pre;
-    vector<char> curr;
-    vector<char> store;
+    string pre = "";
+    string curr = "";
+    string store = "";
     bool fl = 0;
 
-    for (int i = 0; i < tp.size() - 1; i++)
+    for (int i = 0; i <= tp.size() - 1; i++)
     {
         if (tp[i] != '+')
         {
@@ -83,50 +113,15 @@ int main()
         }
         if (tp[i] == '+')
         {
-            if (fl == false)
-            {
-                for (int j = 0; j < curr.size(); j++)
-                {
-                    pre.push_back(tp[j]);
-                }
-                curr.clear();
-                fl = 1;
-            }
-            else if (fl == true)
-            {
-                int cr = 0;
-                int q = 0;
-                for (int h = curr.size() - 1; h >= 0; h--)
-                {
-                    if (q < pre.size())
-                    {
-                        int temp;
-                        temp = (((curr[h] - '0') + (pre[h] - '0')) + cr);
-                        cr = temp / 10;
-                        store.push_back((temp % 10) + '0');
-                    }
-                    else
-                    {
-                        int temp;
-                        temp = ((curr[h] - '0') + cr);
-                        store.push_back(temp + '0');
-                    }
-                }
-                pre.clear();
-                curr.clear();
-                cout << "helooooo";
-                for (int u = 0; u < store.size(); u++)
-                {
-                    pre.push_back(store[u]);
-                }
-            }
+
+            string temp = "";
+            temp = add(pre, curr);
+            pre = temp;
+            curr.clear();
         }
     }
-    cout << "store" << endl;
-    for (int i = 0; i < pre.size(); i++)
-    {
-        cout << pre[i] << " ";
-    }
 
+    cout << endl
+         << "Multiply of x and y :" << pre;
     return 0;
 }
