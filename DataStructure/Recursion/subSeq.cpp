@@ -11,15 +11,17 @@ void sub(string s, string ans)
     }
 
     char ch = s[0];
-
+    int code = ch;
     sub(s.substr(1), ans);
     sub(s.substr(1), ans + ch);
+
+    sub(s.substr(1), to_string(code));
 }
 
 int main()
 {
 
-    sub("ABC", "");
+    sub("AB", "");
 
     return 0;
 }
