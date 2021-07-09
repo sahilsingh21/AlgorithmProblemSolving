@@ -10,7 +10,7 @@ void towerOfHanoi(int n, char sor, char dest, char help)
 
     towerOfHanoi(n - 1, sor, help, dest);
     cout << "Moving to " << sor << " to " << dest << endl;
-    //towerOfHanoi(n - 1, help, dest, sor);
+    towerOfHanoi(n - 1, help, dest, sor);
 }
 
 int main()
