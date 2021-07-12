@@ -136,6 +136,39 @@ void DeleteAll(Node **head)
     *head = NULL;
 }
 
+//Find lenght of link list
+
+void nodeSize(Node *head)
+{
+    Node *temp = head;
+    int count = 0;
+    while (temp != NULL)
+    {
+        count++;
+        temp = temp->next;
+    }
+    cout << "Node size is : " << count << endl;
+}
+
+//search element
+void find(Node *head, int val)
+{
+    Node *src = head;
+    int count = 0;
+    while (src != NULL)
+    {
+        count++;
+        if (src->data == val)
+        {
+            cout << "Value is Found in position : " << count << endl;
+            return;
+        }
+        src = src->next;
+    }
+    cout << "Value is not found" << endl;
+    return;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -164,8 +197,12 @@ int main()
 
     print(head);
 
-    DeleteAll(&head);
-    print(head);
+    // DeleteAll(&head);
+    //print(head);
+
+    nodeSize(head);
+    find(head, 6);
+    find(head, 9);
 
     return 0;
 }
