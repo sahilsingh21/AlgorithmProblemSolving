@@ -10,6 +10,11 @@ public:
 
 void print(Node *temp)
 {
+    if (temp == NULL)
+    {
+        cout << "Node is NULL" << endl;
+        return;
+    }
     while (temp != NULL)
     {
         cout << "->" << temp->data;
@@ -116,6 +121,21 @@ void del(Node **head, int pos)
     return;
 }
 
+//Deleting all nodes in one call
+
+void DeleteAll(Node **head)
+{
+    Node *curr = *head;
+
+    while (curr != NULL)
+    {
+        *head = curr->next;
+        free(curr);
+        curr = *head;
+    }
+    *head = NULL;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -144,8 +164,7 @@ int main()
 
     print(head);
 
-    del(&head, 0);
-    del(&head, 3);
+    DeleteAll(&head);
     print(head);
 
     return 0;
