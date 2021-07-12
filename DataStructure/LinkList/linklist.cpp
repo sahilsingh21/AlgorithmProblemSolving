@@ -49,6 +49,7 @@ void insertTail(Node **head, int val)
     return;
 }
 
+//deleting value by key
 void Delete(Node **head, int key)
 {
     Node *temp = *head;
@@ -74,6 +75,45 @@ void Delete(Node **head, int key)
         pre->next = temp->next;
         delete temp;
     }
+}
+
+//deleting value by position number
+
+void del(Node **head, int pos)
+{
+    int i = 0;
+    Node *temp = *head;
+    Node *pre = NULL;
+    if (*head == NULL)
+    {
+        return;
+    }
+
+    if (i == pos)
+    {
+        *head = temp->next;
+        delete temp;
+        return;
+    }
+
+    while (temp != NULL && i != pos)
+    {
+        pre = temp;
+        temp = temp->next;
+        i++;
+    }
+    if (i != pos)
+    {
+        return;
+    }
+
+    if (i == pos)
+    {
+        pre->next = temp->next;
+        delete temp;
+        return;
+    }
+    return;
 }
 
 int main()
@@ -104,7 +144,8 @@ int main()
 
     print(head);
 
-    Delete(&head, 3);
+    del(&head, 0);
+    del(&head, 3);
     print(head);
 
     return 0;
